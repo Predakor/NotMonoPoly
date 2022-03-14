@@ -245,7 +245,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474718061}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.49, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1988367281}
@@ -264,10 +264,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dices:
-  - {fileID: 3384409308681949435, guid: c817f0fbbb8df6f4b8ba57e92ec35301, type: 3}
-  - {fileID: 3384409308681949435, guid: c817f0fbbb8df6f4b8ba57e92ec35301, type: 3}
+  - {fileID: 4095291639563245322, guid: 7966122e611cac641915e61873c12a19, type: 3}
+  - {fileID: 4095291639563245322, guid: 7966122e611cac641915e61873c12a19, type: 3}
   throwStrength: 1
-  throwStart: {x: 0, y: 0, z: 0}
+  throwStart: {x: 0, y: 2.5, z: 0}
 --- !u!1 &530883217
 GameObject:
   m_ObjectHideFlags: 0
