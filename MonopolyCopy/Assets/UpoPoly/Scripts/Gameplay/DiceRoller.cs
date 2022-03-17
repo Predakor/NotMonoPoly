@@ -38,7 +38,7 @@ public class DiceRoller : MonoBehaviour
 
         Invoke("GetRollResults", 5);
     }
-    int GetRollResults()
+    public int GetRollResults()
     {
         int sum = 0;
         foreach (var dice in dices)

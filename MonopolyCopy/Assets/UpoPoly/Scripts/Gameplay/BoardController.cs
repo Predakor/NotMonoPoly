@@ -6,6 +6,8 @@ public class BoardManager : MonoBehaviour
 {
     [SerializeField] List<Tile> tiles;
     [SerializeField] GameObject tileHolder;
+    [SerializeField] DiceRoller roller;
+    [SerializeField] Player player;
 
     void Awake()
     {
@@ -36,8 +38,26 @@ public class BoardManager : MonoBehaviour
 
     }
 
-    void Update()
+    [ContextMenu("Simulate a roll")]
+    public void MoveSimulate()
     {
+        int rollResult = roller.GetRollResults();
+        MovePlayer(player, rollResult);
+    }
 
+
+    public void MovePlayer(Player player, int amount)
+    {
+        int destination = player.position + amount;
+
+        if (destination > tiles.Count)
+        {
+            destination = (tiles.Count - (player.position + amount)) * -1;
+        }
+        player.position = destination;
+
+        Transform destinationTile = tiles[destination].transform;
+        player.gameObject.transform.position = destinationTile.position;
+        Debug.Log($"You should be on tile {destination}");
     }
 }
