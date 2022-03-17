@@ -28,12 +28,7 @@ public class BoardGenerator : MonoBehaviour
 
         for (int i = 0; i < rowSize; i++)
         {
-            position.x -= offset;
-            Instantiate(tile, position, transform.rotation, parent: transform);
-        }
-        for (int i = 0; i < rowSize; i++)
-        {
-            position.z -= offset;
+            position.z += offset;
             Instantiate(tile, position, transform.rotation, parent: transform);
         }
         for (int i = 0; i < rowSize; i++)
@@ -41,9 +36,15 @@ public class BoardGenerator : MonoBehaviour
             position.x += offset;
             Instantiate(tile, position, transform.rotation, parent: transform);
         }
+
         for (int i = 0; i < rowSize; i++)
         {
-            position.z += offset;
+            position.z -= offset;
+            Instantiate(tile, position, transform.rotation, parent: transform);
+        }
+        for (int i = 0; i < rowSize; i++)
+        {
+            position.x -= offset;
             Instantiate(tile, position, transform.rotation, parent: transform);
         }
     }

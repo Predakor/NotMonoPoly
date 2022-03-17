@@ -263,9 +263,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a785569847fa9f34d88441134cc95cae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dices:
-  - {fileID: 4095291639563245322, guid: 7966122e611cac641915e61873c12a19, type: 3}
-  - {fileID: 4095291639563245322, guid: 7966122e611cac641915e61873c12a19, type: 3}
+  diceAmount: 2
+  dicePrefab: {fileID: 4095291639563245322, guid: 7966122e611cac641915e61873c12a19, type: 3}
+  diceParent: {fileID: 0}
+  dices: []
   throwStrength: 1
   throwStart: {x: 0, y: 2.5, z: 0}
 --- !u!1 &530883217

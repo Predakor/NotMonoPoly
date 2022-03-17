@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 11336983653637389}
   - component: {fileID: 3609744194436291869}
   - component: {fileID: 8447180817161012781}
+  - component: {fileID: -1423425920905101870}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Untagged
@@ -96,3 +97,21 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &-1423425920905101870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4182861325885255450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174e8c9d3e67c3f4da9989b796f6ae06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 0}
+  players: []
+  houses: []
+  name: New Tile
+  basePrice: 1000
+  value: 1000
