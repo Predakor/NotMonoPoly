@@ -25,17 +25,26 @@ public class Tile : MonoBehaviour
     }
 
 
+    public void AddPlayer(Player player)
+    {
+        players.Add(player);
+    }
+    public void RemovePlayer(Player player)
+    {
+        players.Remove(player);
+    }
+
     public void ChangeOwner(Player player)
     {
         owner = player;
-        updateTile();
+        UpdateTile();
     }
 
     public void AddHouse(GameObject house, int amount = 1)
     {
         for (int i = 0; i < amount; i++)
             houses.Add(house);
-        updateTile();
+        UpdateTile();
     }
 
     public void SellHouse(int amount = 1)
@@ -43,11 +52,17 @@ public class Tile : MonoBehaviour
         if (amount > houses.Count)
             amount = 0;
         houses.RemoveAt(houses.Count - amount);
-        updateTile();
+        UpdateTile();
     }
 
-    private void updateTile()
+    public void UpdateTile()
     {
-        throw new NotImplementedException();
+        Vector3 offset = new Vector3(0, .2f, 0);
+        if (players.Count > 1)
+        {
+            for (int i = 0; i < players.Count; i++)
+                players[i].transform.position = transform.position + (offset * i) + (Vector3.up * .1f);
+
+        }
     }
 }
