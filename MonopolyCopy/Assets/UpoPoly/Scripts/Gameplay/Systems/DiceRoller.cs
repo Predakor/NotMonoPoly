@@ -33,19 +33,27 @@ public class DiceRoller : MonoBehaviour
             GameObject dice = Instantiate(dicePrefab, throwStart, randomRotation, diceParent);
             dices.Add(dice);
         }
+    }
 
-        Invoke("GetRollResults", 5);
+    public void ThrowDices()
+    {
+        if (dices.Count > 0)
+            for (int i = 0; i < diceAmount; i++)
+                dices[i].transform.SetPositionAndRotation(throwStart, randomRotation);
+        else
+            SpawnDices();
+
     }
     public int GetRollResults()
     {
         int sum = 0;
         foreach (var dice in dices)
-            sum += checkDiceRoll(dice);
+            sum += CheckDiceRoll(dice);
 
         return sum;
     }
 
-    int checkDiceRoll(GameObject dice)
+    int CheckDiceRoll(GameObject dice)
     {
         Vector3 RayStart = dice.transform.position + Vector3.up;
         RaycastHit hit;

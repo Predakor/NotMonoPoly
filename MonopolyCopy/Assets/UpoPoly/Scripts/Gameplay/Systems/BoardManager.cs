@@ -37,11 +37,15 @@ public class BoardManager : MonoBehaviour
     [ContextMenu("Simulate a roll")]
     public void MoveSimulate()
     {
-        int rollResult = roller.GetRollResults();
-        MovePlayer(rollResult);
+        roller.ThrowDices();
+        Invoke("getResult", 3);
         EndTurn();
     }
-
+    void getResult()
+    {
+        int rollResult = roller.GetRollResults();
+        MovePlayer(rollResult);
+    }
     public void MovePlayer(int amount)
     {
         Player player = players.currentPlayer;
