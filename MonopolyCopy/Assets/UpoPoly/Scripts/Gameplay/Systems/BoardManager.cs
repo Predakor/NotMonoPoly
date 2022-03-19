@@ -12,6 +12,11 @@ public class BoardManager : MonoBehaviour
 
     void Awake()
     {
+
+
+    }
+    void Start()
+    {
         if (tiles.Count > 0) return;
 
         int tilesCount = tileHolder.transform.childCount;
@@ -23,16 +28,8 @@ public class BoardManager : MonoBehaviour
         }
 
     }
-    void Start()
-    {
 
 
-    }
-
-    void EndTurn()
-    {
-        playerManager.NextPlayer();
-    }
 
     [ContextMenu("Simulate a roll")]
     public void MoveSimulate()
@@ -55,9 +52,10 @@ public class BoardManager : MonoBehaviour
         if (destination >= tiles.Count)
         {
             destination = (tiles.Count - (player.position + amount)) * -1;
+            player.AddMoney(400);
         }
+
         player.position = destination;
-        player.AddMoney(400);
 
         Tile destinationTile = tiles[destination];
         player.gameObject.transform.position = destinationTile.transform.position;
@@ -69,4 +67,6 @@ public class BoardManager : MonoBehaviour
         player.CurrentTile.UpdateTile();
 
     }
+
+    void EndTurn() => playerManager.NextPlayer();
 }

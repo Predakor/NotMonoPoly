@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -12,14 +13,17 @@ public class Player : MonoBehaviour
     [SerializeField] List<Tile> ownedTiles;
     [SerializeField] GameObject model;
 
+    [SerializeField] TextMeshProUGUI moneyDisplay;
+
     public int position = 0;
 
     public Tile CurrentTile { get => currentTile; set => currentTile = value; }
 
     void Start()
     {
-        if (CurrentTile) return;
-        Debug.Log("set current tiles");
+        if (!CurrentTile)
+            Debug.Log("set current tiles");
+        UpdateUI();
     }
 
     void Update()
@@ -30,6 +34,7 @@ public class Player : MonoBehaviour
     public void AddMoney(int amount)
     {
         money += amount;
+        UpdateUI();
         if (money > 0) return;
         bankrupt(this);
     }
@@ -37,5 +42,24 @@ public class Player : MonoBehaviour
     void bankrupt(Player player)
     {
         Debug.Log("You're broke as fuck bro");
+        name += "bankrupt";
+    }
+
+    public void BuyTile(Tile tile)
+    {
+        if (tile.value > money) return;
+        AddMoney(-tile.value);
+        ownedTiles.Add(tile);
+    }
+
+    public void SellTile(Tile tile)
+    {
+        ownedTiles.Remove(tile);
+        AddMoney(tile.value);
+    }
+
+    void UpdateUI()
+    {
+        moneyDisplay.text = $"{money}$";
     }
 }
