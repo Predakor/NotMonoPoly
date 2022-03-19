@@ -8,7 +8,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] List<Tile> tiles;
     [SerializeField] GameObject tileHolder;
     [SerializeField] DiceRoller roller;
-    [SerializeField] PlayersManager players;
+    [SerializeField] PlayersManager playerManager;
 
     void Awake()
     {
@@ -31,7 +31,7 @@ public class BoardManager : MonoBehaviour
 
     void EndTurn()
     {
-        players.NextPlayer();
+        playerManager.NextPlayer();
     }
 
     [ContextMenu("Simulate a roll")]
@@ -48,7 +48,7 @@ public class BoardManager : MonoBehaviour
     }
     public void MovePlayer(int amount)
     {
-        Player player = players.currentPlayer;
+        Player player = playerManager.currentPlayer;
 
         int destination = player.position + amount;
 

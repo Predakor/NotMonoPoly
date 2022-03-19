@@ -23,7 +23,7 @@ public class DiceRoller : MonoBehaviour
     }
     void Start()
     {
-        SpawnDices();
+
     }
 
     void SpawnDices()
