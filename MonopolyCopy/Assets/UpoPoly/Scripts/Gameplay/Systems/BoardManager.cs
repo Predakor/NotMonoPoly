@@ -35,7 +35,7 @@ public class BoardManager : MonoBehaviour
     public void MoveSimulate()
     {
         roller.ThrowDices();
-        Invoke("getResult", 3);
+        Invoke("getResult", 2);
         EndTurn();
     }
     void getResult()
