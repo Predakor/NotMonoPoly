@@ -10,7 +10,7 @@ public class Tile : MonoBehaviour
     [SerializeField] List<Player> players = new List<Player>();
     [SerializeField] List<GameObject> houses = new List<GameObject>();
     [SerializeField] new string name = "New Tile";
-    [SerializeField] int basePrice = 1000;
+    [SerializeField] int basePrice = 500;
     public int value { get; private set; }
 
     #endregion
@@ -26,13 +26,28 @@ public class Tile : MonoBehaviour
     }
 
 
+
+    public void OnPlayerEntry()
+    {
+
+    }
+    public void OnPlayerExit()
+    {
+
+    }
+
+    public void BuyTile(Player player)
+    {
+        owner = player;
+    }
+
     public void AddPlayer(Player player)
     {
         players.Add(player);
         if (owner == null)
             ShowTileCard(true);
         else if (owner == player)
-            ShowTileCard(true);
+            return;
         else
             player.AddMoney(-value);
 
@@ -40,7 +55,7 @@ public class Tile : MonoBehaviour
 
     private void ShowTileCard(bool isOwner)
     {
-        throw new NotImplementedException();
+        BoardManager.instance.onPlayerEnter.Invoke();
     }
 
     public void RemovePlayer(Player player)
@@ -69,9 +84,6 @@ public class Tile : MonoBehaviour
         UpdatePlayerPositions();
     }
 
-
-
-
     public void UpdateTile()
     {
         UpdatePlayerPositions();
@@ -83,7 +95,7 @@ public class Tile : MonoBehaviour
         if (players.Count > 1)
         {
             for (int i = 0; i < players.Count; i++)
-                players[i].transform.position = transform.position + (offset * i) + (Vector3.up * .1f);
+                players[i].transform.position = transform.position + (offset * i);
 
         }
     }

@@ -7,7 +7,7 @@ public class PlayersManager : MonoBehaviour
 
     [SerializeField] List<Player> players;
 
-    public Player currentPlayer;
+    public Player currentPlayer { get; private set; }
     private int currentIndex;
 
     void Start()

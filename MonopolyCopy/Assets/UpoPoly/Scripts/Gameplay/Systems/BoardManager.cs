@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BoardManager : MonoBehaviour
 {
@@ -10,10 +11,15 @@ public class BoardManager : MonoBehaviour
     [SerializeField] DiceRoller roller;
     [SerializeField] PlayersManager playerManager;
 
+    public static BoardManager instance;
+    public UnityEvent onPlayerEnter;
+
+    Player currentPLayer => playerManager.currentPlayer;
+
     void Awake()
     {
-
-
+        if (instance) return;
+        instance = this;
     }
     void Start()
     {
@@ -29,7 +35,12 @@ public class BoardManager : MonoBehaviour
 
     }
 
-
+    public void BuyTile()
+    {
+        Tile _tile = currentPLayer.currentTile;
+        currentPLayer.BuyTile(_tile);
+        _tile.BuyTile(currentPLayer);
+    }
 
     [ContextMenu("Simulate a roll")]
     public void MoveSimulate()
@@ -63,9 +74,9 @@ public class BoardManager : MonoBehaviour
         //change this mess
         destinationTile.AddPlayer(player);
         destinationTile.UpdateTile();
-        player.CurrentTile.RemovePlayer(player);
-        player.CurrentTile.UpdateTile();
-
+        player.currentTile.RemovePlayer(player);
+        player.currentTile = destinationTile;
+        player.currentTile.UpdateTile();
     }
 
     void EndTurn() => playerManager.NextPlayer();

@@ -7,21 +7,19 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    [SerializeField] Tile currentTile;
     [SerializeField] new string name;
     [SerializeField] int money = 1000;
     [SerializeField] List<Tile> ownedTiles;
     [SerializeField] GameObject model;
-
     [SerializeField] TextMeshProUGUI moneyDisplay;
+    public Tile currentTile;
 
     public int position = 0;
 
-    public Tile CurrentTile { get => currentTile; set => currentTile = value; }
 
     void Start()
     {
-        if (!CurrentTile)
+        if (!currentTile)
             Debug.Log("set current tiles");
         UpdateUI();
     }
