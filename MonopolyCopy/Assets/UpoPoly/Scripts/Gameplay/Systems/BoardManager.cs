@@ -10,11 +10,11 @@ public class BoardManager : MonoBehaviour
     [SerializeField] GameObject tileHolder;
     [SerializeField] DiceRoller roller;
     [SerializeField] PlayersManager playerManager;
+    [SerializeField] CardManager cardManager;
 
     public static BoardManager instance;
-    public UnityEvent onPlayerEnter;
 
-    Player currentPLayer => playerManager.currentPlayer;
+    Player currentPlayer => playerManager.CurrentPlayer;
 
     void Awake()
     {
@@ -32,14 +32,20 @@ public class BoardManager : MonoBehaviour
             if (currentTile.GetComponent<Tile>())
                 tiles.Add(currentTile.GetComponent<Tile>());
         }
+    }
+
+    public void GetBuyCard(Tile tile)
+    {
+        cardManager.ShowBuyCard(tile);
 
     }
+    public void GetDetailsCard(Tile tile) => cardManager.ShowDetailsCard(tile);
 
     public void BuyTile()
     {
-        Tile _tile = currentPLayer.currentTile;
-        currentPLayer.BuyTile(_tile);
-        _tile.BuyTile(currentPLayer);
+        Tile _tile = currentPlayer.currentTile;
+        currentPlayer.BuyTile(_tile);
+        _tile.BuyTile(currentPlayer);
     }
 
     [ContextMenu("Simulate a roll")]
@@ -47,7 +53,6 @@ public class BoardManager : MonoBehaviour
     {
         roller.ThrowDices();
         Invoke("getResult", 2);
-        EndTurn();
     }
     void getResult()
     {
@@ -56,7 +61,7 @@ public class BoardManager : MonoBehaviour
     }
     public void MovePlayer(int amount)
     {
-        Player player = playerManager.currentPlayer;
+        Player player = playerManager.CurrentPlayer;
 
         int destination = player.position + amount;
 
@@ -72,11 +77,9 @@ public class BoardManager : MonoBehaviour
         player.gameObject.transform.position = destinationTile.transform.position;
 
         //change this mess
-        destinationTile.AddPlayer(player);
-        destinationTile.UpdateTile();
-        player.currentTile.RemovePlayer(player);
+        destinationTile.OnPlayerEntry(player);
+        player.currentTile.OnPlayerExit(player);
         player.currentTile = destinationTile;
-        player.currentTile.UpdateTile();
     }
 
     void EndTurn() => playerManager.NextPlayer();

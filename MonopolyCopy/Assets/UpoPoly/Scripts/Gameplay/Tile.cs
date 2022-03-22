@@ -6,82 +6,70 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     #region Variables
-    [SerializeField] Player owner;
-    [SerializeField] List<Player> players = new List<Player>();
-    [SerializeField] List<GameObject> houses = new List<GameObject>();
     [SerializeField] new string name = "New Tile";
+    [SerializeField] Player owner = null;
+    [SerializeField] List<Player> playersOnTile;
+    [SerializeField] List<GameObject> houses;
     [SerializeField] int basePrice = 500;
-    public int value { get; private set; }
-
+    int value = 0;
+    public bool isForSale = true;
     #endregion
+
+    public string Name { get => name; private set => name = value; }
+    public Player Owner { get => owner; private set => owner = value; }
+    public int Upgrades { get => houses.Count; }
+    public int BasePrice { get => basePrice; private set => basePrice = value; }
+    public int Value { get => value; private set => this.value = value; }
+
 
     void Start()
     {
-
+        if (value != 0) return;
+        value = basePrice;
     }
 
-    void Update()
+    public void OnPlayerEntry(Player player)
     {
+        playersOnTile.Add(player);
+        if (Owner == null)
+            ShowSaleCard();
+        else if (Owner == player)
+            return;
+        else
+            player.AddMoney(-Value);
+        //update other player UI too
 
+        UpdatePlayerPositions();
     }
-
-
-
-    public void OnPlayerEntry()
+    public void OnPlayerExit(Player player)
     {
-
-    }
-    public void OnPlayerExit()
-    {
-
+        playersOnTile.Remove(player);
     }
 
     public void BuyTile(Player player)
     {
-        owner = player;
+        Owner = player;
+        isForSale = false;
+        UpdateTile();
     }
 
-    public void AddPlayer(Player player)
+    private void ShowSaleCard()
     {
-        players.Add(player);
-        if (owner == null)
-            ShowTileCard(true);
-        else if (owner == player)
-            return;
-        else
-            player.AddMoney(-value);
-
+        BoardManager.instance.GetBuyCard(this);
     }
 
-    private void ShowTileCard(bool isOwner)
-    {
-        BoardManager.instance.onPlayerEnter.Invoke();
-    }
-
-    public void RemovePlayer(Player player)
-    {
-        players.Remove(player);
-    }
-
-    public void ChangeOwner(Player player)
-    {
-        owner = player;
-        UpdatePlayerPositions();
-    }
-
-    public void AddHouse(GameObject house, int amount = 1)
+    public void BuyHouse(GameObject house, int amount = 1)
     {
         for (int i = 0; i < amount; i++)
             houses.Add(house);
-        UpdatePlayerPositions();
+        UpdateHouses();
     }
-
     public void SellHouse(int amount = 1)
     {
         if (amount > houses.Count)
-            amount = 0;
-        houses.RemoveAt(houses.Count - amount);
-        UpdatePlayerPositions();
+            amount = houses.Count;
+        houses.RemoveAt(houses.Count);
+        UpdateHouses();
     }
 
     public void UpdateTile()
@@ -89,18 +77,19 @@ public class Tile : MonoBehaviour
         UpdatePlayerPositions();
         UpdateHouses();
     }
+
+
+
+
     void UpdatePlayerPositions()
     {
         Vector3 offset = new Vector3(0, .2f, 0);
-        if (players.Count > 1)
-        {
-            for (int i = 0; i < players.Count; i++)
-                players[i].transform.position = transform.position + (offset * i);
-
-        }
+        for (int i = 0; i < playersOnTile.Count; i++)
+            playersOnTile[i].transform.position = transform.position + (offset * i);
     }
+
     void UpdateHouses()
     {
-        value = basePrice + (300 * houses.Count);
+        value = BasePrice + (300 * houses.Count);
     }
 }

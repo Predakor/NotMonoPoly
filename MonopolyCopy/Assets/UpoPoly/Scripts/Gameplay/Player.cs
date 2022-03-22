@@ -12,8 +12,8 @@ public class Player : MonoBehaviour
     [SerializeField] List<Tile> ownedTiles;
     [SerializeField] GameObject model;
     [SerializeField] TextMeshProUGUI moneyDisplay;
+    [SerializeField] TextMeshProUGUI nameDisplay;
     public Tile currentTile;
-
     public int position = 0;
 
 
@@ -32,9 +32,9 @@ public class Player : MonoBehaviour
     public void AddMoney(int amount)
     {
         money += amount;
+        if (money <= 0)
+            bankrupt(this);
         UpdateUI();
-        if (money > 0) return;
-        bankrupt(this);
     }
 
     void bankrupt(Player player)
@@ -45,19 +45,20 @@ public class Player : MonoBehaviour
 
     public void BuyTile(Tile tile)
     {
-        if (tile.value > money) return;
-        AddMoney(-tile.value);
+        if (tile.Value > money) return;
+        AddMoney(-tile.Value);
         ownedTiles.Add(tile);
     }
 
     public void SellTile(Tile tile)
     {
         ownedTiles.Remove(tile);
-        AddMoney(tile.value);
+        AddMoney(tile.Value);
     }
 
     void UpdateUI()
     {
         moneyDisplay.text = $"{money}$";
+        nameDisplay.text = name;
     }
 }
