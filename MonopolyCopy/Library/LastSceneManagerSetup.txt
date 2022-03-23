@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/UpoPoly/_Levels/SampleScene.unity
+- path: Assets/UpoPoly/_Levels/MainMenu.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
