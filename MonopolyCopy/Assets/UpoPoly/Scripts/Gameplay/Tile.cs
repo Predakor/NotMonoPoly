@@ -34,12 +34,15 @@ public class Tile : MonoBehaviour
         if (Owner == null)
             ShowSaleCard();
         else if (Owner == player)
-            return;
+            ShowDetailsCard();
         else
             player.AddMoney(-Value);
         //update other player UI too
 
         UpdatePlayerPositions();
+
+        void ShowDetailsCard() => BoardManager.instance.GetDetailsCard(this);
+        void ShowSaleCard() => BoardManager.instance.GetBuyCard(this);
     }
     public void OnPlayerExit(Player player)
     {
@@ -53,10 +56,7 @@ public class Tile : MonoBehaviour
         UpdateTile();
     }
 
-    private void ShowSaleCard()
-    {
-        BoardManager.instance.GetBuyCard(this);
-    }
+
 
     public void BuyHouse(GameObject house, int amount = 1)
     {

@@ -48,17 +48,13 @@ public class DiceRoller : MonoBehaviour
     {
         int sum = 0;
         foreach (var dice in dices)
-            sum += CheckDiceRoll(dice);
-
+        {
+            Vector3 RayStart = dice.transform.position + Vector3.up;
+            RaycastHit hit;
+            Physics.Raycast(RayStart, Vector3.down, out hit, 1.4f);
+            sum += int.Parse(hit.collider.gameObject.name);
+        }
         return sum;
-    }
-
-    int CheckDiceRoll(GameObject dice)
-    {
-        Vector3 RayStart = dice.transform.position + Vector3.up;
-        RaycastHit hit;
-        Physics.Raycast(RayStart, Vector3.down, out hit, 1.4f);
-        return int.Parse(hit.collider.gameObject.name);
     }
 
     void OnDrawGizmosSelected()

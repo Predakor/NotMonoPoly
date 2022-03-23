@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+    void Start()
+    {
+        if (instance) return;
+        instance = this;
+    }
 
-	void Start()
-	{
-	
-	}
+    void Update()
+    {
 
-	void Update()
-	{
-	
-	}
+    }
 }

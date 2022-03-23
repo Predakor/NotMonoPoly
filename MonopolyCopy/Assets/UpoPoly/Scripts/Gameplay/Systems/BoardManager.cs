@@ -34,17 +34,13 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    public void GetBuyCard(Tile tile)
-    {
-        cardManager.ShowBuyCard(tile);
-
-    }
+    public void GetBuyCard(Tile tile) => cardManager.ShowBuyCard(tile);
     public void GetDetailsCard(Tile tile) => cardManager.ShowDetailsCard(tile);
 
-    public void BuyTile()
+    public void BuyTile(Player player)
     {
-        Tile _tile = currentPlayer.currentTile;
-        currentPlayer.BuyTile(_tile);
+        Tile _tile = player.currentTile;
+        player.BuyTile(_tile);
         _tile.BuyTile(currentPlayer);
     }
 
