@@ -7,7 +7,7 @@ namespace HelloWorld
     {
         void OnGUI()
         {
-            GUILayout.BeginArea(new Rect(10, 10, 300, 300));
+            GUILayout.BeginArea(new Rect(10, 50, 300, 300));
             if (!NetworkManager.Singleton.IsClient && !NetworkManager.Singleton.IsServer)
             {
                 StartButtons();
@@ -22,12 +22,16 @@ namespace HelloWorld
             GUILayout.EndArea();
         }
 
+        public void StartHosting() => NetworkManager.Singleton.StartHost();
+        public void StartClient() => NetworkManager.Singleton.StartClient();
+
         static void StartButtons()
         {
             if (GUILayout.Button("Host")) NetworkManager.Singleton.StartHost();
             if (GUILayout.Button("Client")) NetworkManager.Singleton.StartClient();
             if (GUILayout.Button("Server")) NetworkManager.Singleton.StartServer();
         }
+
 
         static void StatusLabels()
         {

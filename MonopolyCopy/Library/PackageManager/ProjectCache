@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637836420710015239
-    m_Hash: 14482543
+      ticks: 637841692664386048
+    m_Hash: 3743868693
   m_LockFileStatus:
     m_FilePath: C:/Users/Patry/unityProjects/UnityGame/unity_stuff/NotMonoPoly/MonopolyCopy/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637836420710414174
-    m_Hash: 1291689342
+      ticks: 637841692664396024
+    m_Hash: 2160839690
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -207,6 +207,7 @@ m_PackageAssets:
         - 3.0.9
         - 3.0.10
         - 3.0.12
+        - 3.0.13
         compatible:
         - 1.0.2
         - 1.0.6
@@ -236,6 +237,7 @@ m_PackageAssets:
         - 3.0.9
         - 3.0.10
         - 3.0.12
+        - 3.0.13
         verified: 2.0.7
       dependencies:
       - name: com.unity.test-framework
@@ -3617,6 +3619,7 @@ m_PackageAssets:
         - 1.0.0-pre.6
         - 1.1.0
         - 1.2.3-pre.1
+        - 1.2.3
         compatible:
         - 0.0.9-preview.1
         - 0.0.9-preview.2
@@ -3662,6 +3665,7 @@ m_PackageAssets:
         - 1.0.0-pre.6
         - 1.1.0
         - 1.2.3-pre.1
+        - 1.2.3
         verified: 
       dependencies:
       - name: com.unity.burst
