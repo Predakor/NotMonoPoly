@@ -78,9 +78,6 @@ public class Tile : MonoBehaviour
         UpdateHouses();
     }
 
-
-
-
     void UpdatePlayerPositions()
     {
         Vector3 offset = new Vector3(0, .2f, 0);

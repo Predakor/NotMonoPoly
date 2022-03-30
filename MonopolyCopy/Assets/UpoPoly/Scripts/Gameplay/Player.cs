@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Photon.Pun;
 
 public class Player : MonoBehaviour
 {
@@ -14,13 +15,18 @@ public class Player : MonoBehaviour
     [SerializeField] TextMeshProUGUI nameDisplay;
     public Tile currentTile;
     public int position = 0;
+    [SerializeField] PhotonView view;
 
-
+    void Awake()
+    {
+        BoardManager.instance.Players.AddPlayer(this);
+    }
     void Start()
     {
         if (!currentTile)
-            Debug.Log("set current tiles");
-        UpdateUI();
+            currentTile = BoardManager.instance.Tiles[0];
+        // UpdateUI();
+        if (!view) view = GetComponent<PhotonView>();
     }
 
     void Update()
@@ -56,7 +62,7 @@ public class Player : MonoBehaviour
 
     void UpdateUI()
     {
-        moneyDisplay.text = $"{money}$";
-        nameDisplay.text = name;
+        // moneyDisplay.text = $"{money}$";
+        // nameDisplay.text = name;
     }
 }

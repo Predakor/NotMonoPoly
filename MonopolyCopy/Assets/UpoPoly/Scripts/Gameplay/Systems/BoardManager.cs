@@ -14,34 +14,38 @@ public class BoardManager : MonoBehaviour
 
     public static BoardManager instance;
 
+
     Player currentPlayer => playerManager.CurrentPlayer;
+    public PlayersManager Players { get => playerManager; }
+    public List<Tile> Tiles { get => tiles; }
 
     void Awake()
     {
         if (instance) return;
         instance = this;
     }
+
     void Start()
     {
-        if (tiles.Count > 0) return;
+        if (Tiles.Count > 0) return;
 
         int tilesCount = tileHolder.transform.childCount;
         for (int i = 0; i < tilesCount; i++)
         {
             GameObject currentTile = tileHolder.transform.GetChild(i).gameObject;
             if (currentTile.GetComponent<Tile>())
-                tiles.Add(currentTile.GetComponent<Tile>());
+                Tiles.Add(currentTile.GetComponent<Tile>());
         }
     }
 
     public void GetBuyCard(Tile tile) => cardManager.ShowBuyCard(tile);
     public void GetDetailsCard(Tile tile) => cardManager.ShowDetailsCard(tile);
 
-    public void BuyTile(Player player)
+    public void BuyTile()
     {
-        Tile _tile = player.currentTile;
-        player.BuyTile(_tile);
-        _tile.BuyTile(currentPlayer);
+        Tile tile = currentPlayer.currentTile;
+        currentPlayer.BuyTile(tile);
+        tile.BuyTile(currentPlayer);
     }
 
     [ContextMenu("Simulate a roll")]
@@ -61,15 +65,15 @@ public class BoardManager : MonoBehaviour
 
         int destination = player.position + amount;
 
-        if (destination >= tiles.Count)
+        if (destination >= Tiles.Count)
         {
-            destination = (tiles.Count - (player.position + amount)) * -1;
+            destination = (Tiles.Count - (player.position + amount)) * -1;
             player.AddMoney(400);
         }
 
         player.position = destination;
 
-        Tile destinationTile = tiles[destination];
+        Tile destinationTile = Tiles[destination];
         player.gameObject.transform.position = destinationTile.transform.position;
 
         //change this mess

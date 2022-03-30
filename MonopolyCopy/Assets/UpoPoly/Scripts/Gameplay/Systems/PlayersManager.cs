@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class PlayersManager : MonoBehaviour
 {
-
     [SerializeField] List<Player> players;
     [SerializeField] Player currentPlayer;
     private int currentIndex;
-    public Player CurrentPlayer { get => currentPlayer; private set => currentPlayer = value; }
+    public Player CurrentPlayer { get => currentPlayer; }
 
     void Start()
     {
@@ -31,12 +30,4 @@ public class PlayersManager : MonoBehaviour
         players.Add(player);
 
     }
-    public void GeneratePlayers()
-    {
-        foreach (Player player in players)
-        {
-            Instantiate(player, transform.position, transform.rotation);
-        }
-    }
-
 }
